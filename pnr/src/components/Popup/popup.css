@@ -1,0 +1,109 @@
+.popup {
+  position: absolute;
+  bottom: -100px;
+  left: 10px;
+  right: 10px;
+  border-radius: 5px;
+  background-color: rgb(245, 245, 245);
+  padding: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transition: bottom cubic-bezier(0.25, 0.1, 0.37, 1.38) 0.3s;
+}
+
+.popup.visible {
+  bottom: 50px;
+}
+
+.popup-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.popup-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  width: 48px;
+  box-sizing: border-box;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgb(28, 57, 223);
+  border-radius: 50%;
+  border: 4px solid rgb(28, 57, 223);
+  background-color: rgb(240, 242, 255);
+  padding-top: 3px;
+  margin: auto 20px;
+}
+
+.popup-count.warning {
+  color: rgb(238, 141, 15);
+  border: 4px solid rgb(238, 141, 15);
+  background-color: rgb(255, 245, 233);
+}
+
+.popup-count.danger {
+  color: rgb(238, 15, 15);
+  border: 4px solid rgb(238, 15, 15);
+  background-color: rgb(252, 232, 232);
+}
+
+.popup-count.invalid {
+  color: rgb(122, 122, 122);
+  border: 3px solid rgb(122, 122, 122);
+  background-color: rgb(247, 247, 247);
+}
+
+.popup-informations {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  width: 400px;
+}
+
+.popup-park-name {
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.popup-wrapper p {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.navigation-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  bottom: 0;
+  right: 0;
+  background-color: rgb(245, 245, 245);
+  border: 3px solid rgb(28, 57, 223);
+  border-radius: 10px;
+  color: rgb(28, 57, 223);
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: bottom cubic-bezier(0.25, 0.1, 0.37, 1.38) 0.3s;
+}
+
+.navigation-button.visible {
+  bottom: 110%;
+}
+
+.navigation-button span {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.popup-bookSlot {
+  float: right;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #2cb42c;
+  color: rgb(224, 224, 224);
+}
