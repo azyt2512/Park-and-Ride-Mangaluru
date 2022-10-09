@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RealTimeParkRidePopup = ({ data }) => {
-  const { grp_nom, grp_disponible, grp_exploitation, grp_statut } = data.fields;
+const RealTimeParkRidePopup = ({ data ,onClick1}) => {
+  const {  grp_nom, grp_disponible, grp_exploitation, grp_statut } = data.fields;
+  let _id = data._id
   let count = grp_disponible;
 
   let countClassName = `popup-count ${
@@ -27,6 +28,10 @@ const RealTimeParkRidePopup = ({ data }) => {
     count = 'X';
     countClassName = 'popup-count danger';
   }
+   const handleClick = (e)=>{
+      e.preventDefault();
+      onClick1(e.target.name);
+   }
 
   return (
     <div className="popup-wrapper">
@@ -38,7 +43,7 @@ const RealTimeParkRidePopup = ({ data }) => {
            Number of total places : <strong>{grp_exploitation}</strong>
         </p>
       </div>
-      <button className='popup-bookSlot' name='book'>Book Slot</button>
+      <button className='popup-bookSlot' disabled={count==0 ? true : false} name={_id} onClick={handleClick}>Book Slot</button>
     </div>
   );
 };

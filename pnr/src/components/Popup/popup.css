@@ -1,17 +1,19 @@
 .popup {
   position: absolute;
   bottom: -100px;
+  display: none;
   left: 10px;
   right: 10px;
   border-radius: 5px;
   background-color: rgb(245, 245, 245);
   padding: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  transition: bottom cubic-bezier(0.25, 0.1, 0.37, 1.38) 0.3s;
+  transition: bottom cubic-bezier(0.25, 0.1, 0.37, 1.38) 0.8s;
 }
 
 .popup.visible {
   bottom: 50px;
+  display: block;
 }
 
 .popup-wrapper {
@@ -103,6 +105,7 @@
   font-size: 18px;
   padding: 10px;
   border-radius: 5px;
+  cursor: pointer;
   border: none;
   background-color: #2cb42c;
   color: rgb(224, 224, 224);

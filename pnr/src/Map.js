@@ -9,7 +9,7 @@ import ReactDOM from "react-dom";
 // import mapboxgl from "mapbox-gl";
 import maplibregl from "maplibre-gl";
 import "./Map.css";
-
+import axios from "axios";
 import { AppDataContext } from "./dataProvider";
 import Header from "./components/Header";
 import Marker from "./components/Marker";
@@ -68,6 +68,29 @@ function Map() {
 
     getData();
   }, []);
+  
+  const handleBookClick = async (_id) => {
+      
+    let place=data.findIndex((item)=>item._id === _id)
+    if (place !== -1){
+    let avl =  data[place].fields.grp_disponible - 1; 
+    let nwplace = data[place].fields;
+    let nwdata = data;
+    nwplace.grp_disponible = avl; 
+    nwplace.disponibilite = avl; 
+    nwdata[place].fields = nwplace;
+    try {
+    
+         console.log(nwplace);
+         const res = await axios.put("http://localhost:5000/api/parkinglot/" + _id, nwplace)
+         console.log(res);
+         setData(nwdata);
+      
+    } catch (error) {
+      console.log(error);
+    }
+    }
+};
 
   const handlePointClick = useCallback(
     (point) => {
@@ -119,7 +142,7 @@ function Map() {
         }
       });
     }
-  }, [map, data, handlePointClick]);
+  }, [map, data, handlePointClick, handleBookClick]);
 
   // Display all parks on map
   useEffect(() => {
@@ -177,12 +200,12 @@ function Map() {
     setIsLoading(true);
 
     // Get all parks of Nantes
-    try {
-      const allParks = await getAllParks();
-      setAllParks(allParks);
-    } catch (e) {
-      console.error(e);
-    }
+    // try {
+    //   const allParks = await getAllParks();
+    //   setAllParks(allParks);
+    // } catch (e) {
+    //   console.error(e);
+    // }
 
     // Get parks with real time places numbers
     try {
@@ -228,6 +251,7 @@ function Map() {
     setPopupData({ type: popupTypes.freeParkRide, data: point });
     setShowPopup(true);
   };
+  
 
   return (
     <div className="Map">
@@ -242,6 +266,7 @@ function Map() {
         data={popupData}
         visible={showPopup}
         onClick={() => setShowPopup(false)}
+        onClick1={handleBookClick}
       />
     </div>
   );

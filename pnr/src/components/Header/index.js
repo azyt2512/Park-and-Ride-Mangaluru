@@ -15,7 +15,7 @@ function Header({ data, onRefresh, onToggleAllParks, isLoading }) {
   // Set last sync time
   useEffect(() => {
     if (data.length) {
-      const ts = data[0].record_timestamp;
+      const ts = data[0].updatedAt;
       const date = new Date(ts);
 
       const hours = date.getHours();

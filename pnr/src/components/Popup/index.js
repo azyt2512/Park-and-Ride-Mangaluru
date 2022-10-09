@@ -11,7 +11,7 @@ export const popupTypes = {
   realTimeParkRide: 'realTime',
   freeParkRide: 'freeParkRide',
 };
-function Popup({ data, visible, onClick }) {
+function Popup({ data, visible, onClick, onClick1 }) {
   if (!data) return <div className="popup"></div>;
   let count = data.data.fields.grp_disponible;
   const wrapperClassName = `popup ${visible ? 'visible' : ''}`;
@@ -49,7 +49,7 @@ function Popup({ data, visible, onClick }) {
         <span>Direction</span>
       </div>
       {data.type === popupTypes.realTimeParkRide && (
-        <RealTimeParkRidePopup data={data.data} />
+        <RealTimeParkRidePopup data={data.data} onClick1={onClick1}/>
       )}
       {data.type === popupTypes.freeParkRide && <FreeParkRidePopup data={data.data} />}
       
@@ -61,7 +61,8 @@ function Popup({ data, visible, onClick }) {
 Popup.propTypes = {
   data: PropTypes.object,
   visible: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  onClick1: PropTypes.func.isRequired
 }
 
 export default Popup;

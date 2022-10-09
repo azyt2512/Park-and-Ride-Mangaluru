@@ -17,15 +17,19 @@ router.get("/", async (req, res) => {
 //UPDATE
 
 router.put("/:id",  async (req, res) => {
+     const avl = 135;
     try {
-      const updatedOrder = await Order.findByIdAndUpdate(
+      const updatedPark = await Parkinglot.findByIdAndUpdate(
         req.params.id,
         {
-          $set: req.body,
-        },
-        { new: true }
+          $set: {
+            //  "fields.disponibilite":avl,
+             "fields.grp_disponible":avl
+          }
+        }
       );
-      res.status(200).json(updatedOrder);
+      console.log(updatedPark);
+      res.status(200).json(updatedPark);
     } catch (err) {
       res.status(500).json(err);
     }

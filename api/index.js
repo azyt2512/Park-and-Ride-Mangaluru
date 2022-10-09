@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
 const parkRoute = require("./routes/parkinglot");
+const ticketRoute = require("./routes/tickets");
 
 
 let MONGO_URL="mongodb://localhost:27017/PNR"
@@ -18,6 +19,7 @@ mongoose
 app.use(cors());
 app.use(express.json());
 app.use("/api/parkinglot", parkRoute);
+app.use("/api/ticket", ticketRoute);
 
 
 app.listen(process.env.PORT || 5000, () => {
