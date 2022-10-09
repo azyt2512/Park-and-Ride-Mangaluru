@@ -16,19 +16,23 @@ router.get("/", async (req, res) => {
 
 //UPDATE
 
-router.put("/:id",  async (req, res) => {
+router.patch("/:id",  async (req, res) => {
      const avl = 135;
     try {
-      const updatedPark = await Parkinglot.findByIdAndUpdate(
-        req.params.id,
+      const updatedPark = await Parkinglot.updateOne(
+        {_id:req.params.id},
         {
-          $set: {
-            //  "fields.disponibilite":avl,
-             "fields.grp_disponible":avl
-          }
+          // fields: {
+          //   $dec:{
+          //     disponibilite:1,
+          //     grp_disponible:1
+          //   }
+          // }
+           $set:{"fields.disponibilite":avl,
+                  "fields.grp_disponible":avl}
         }
       );
-      console.log(updatedPark);
+      // console.log(updatedPark);
       res.status(200).json(updatedPark);
     } catch (err) {
       res.status(500).json(err);

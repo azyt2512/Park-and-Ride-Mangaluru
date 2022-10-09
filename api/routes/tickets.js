@@ -29,19 +29,19 @@ router.post("/add", async (req, res) => {
 //CHECKOUT
 
 router.delete("/checkout", async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const ticket = await Tickets.findOne({ vehicle: req.body.v_no });
     !ticket && res.status(401).json("Wrong credentials!");
 
-    console.log(ticket);
+    // console.log(ticket);
     const hashedPassword = CryptoJS.AES.decrypt(
       ticket.reff_no,
       process.env.PASS_SEC
     );
     const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
     OriginalPassword !== req.body.seckey && res.status(401).json("Wrong credentials!");
-    console.log(OriginalPassword);  
+    // console.log(OriginalPassword);  
     
     const delticket = await Tickets.findOneAndDelete({vehicle:req.body.v_no, reff_no:ticket.reff_no});
     res.status(200).json(delticket);  
