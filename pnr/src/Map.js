@@ -13,6 +13,7 @@ import axios from "axios";
 import { AppDataContext } from "./dataProvider";
 import Header from "./components/Header";
 import Marker from "./components/Marker";
+import Utility from "./components/Popup/utilities";
 import Popup, { popupTypes } from "./components/Popup";
 import { getAllParks, getRealTimeParks } from "./utils/data";
 
@@ -24,7 +25,9 @@ function Map() {
   const [allParks, setAllParks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [popupData, setPopupData] = useState(undefined);
+  const [utilityData, setUtilityData] = useState({_id:null,place:null});
   const [showPopup, setShowPopup] = useState(false);
+  const [showUtility, setShowUtility] = useState(false);
 
   const mapContainer = useRef();
 
@@ -69,27 +72,9 @@ function Map() {
     getData();
   }, []);
   
-  const handleBookClick = async (_id) => {
-      
-    let place=data.findIndex((item)=>item._id === _id)
-    if (place !== -1){
-    let avl =  data[place].fields.grp_disponible - 1; 
-    let nwplace = data[place].fields;
-    let nwdata = data;
-    nwplace.grp_disponible = avl; 
-    nwplace.disponibilite = avl; 
-    nwdata[place].fields = nwplace;
-    try {
-    
-         console.log(nwplace);
-         const res = await axios.put("http://localhost:5000/api/parkinglot/" + _id, nwplace)
-         console.log(res);
-         setData(nwdata);
-      
-    } catch (error) {
-      console.log(error);
-    }
-    }
+  const handleBookClick =  (_id, name) => {
+      setUtilityData({"_id":_id,"place":name});
+      setShowUtility(true);
 };
 
   const handlePointClick = useCallback(
@@ -267,6 +252,11 @@ function Map() {
         visible={showPopup}
         onClick={() => setShowPopup(false)}
         onClick1={handleBookClick}
+      />
+      <Utility
+        data={utilityData}
+        visible={showUtility}
+        onClick={() => setShowUtility(false)}
       />
     </div>
   );

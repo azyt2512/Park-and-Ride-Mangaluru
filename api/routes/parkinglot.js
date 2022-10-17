@@ -14,6 +14,19 @@ router.get("/", async (req, res) => {
     }
 });
 
+//GET ONE
+
+router.get("/getone/:id", async (req, res) => {
+    const _id = req.params.id;
+    try {
+        const parkings = await Parkinglot.findById(_id);
+        // console.log(parkings);
+        res.status(200).json(parkings);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 //UPDATE
 
 router.patch("/:id",  async (req, res) => {

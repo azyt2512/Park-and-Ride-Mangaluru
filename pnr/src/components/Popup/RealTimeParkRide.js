@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 const RealTimeParkRidePopup = ({ data ,onClick1}) => {
   const {  grp_nom, grp_disponible, grp_exploitation, grp_statut } = data.fields;
-  let _id = data._id
+  let _id = data._id;
+  let p_name = data.fields.grp_nom;
   let count = grp_disponible;
 
   let countClassName = `popup-count ${
@@ -30,7 +31,7 @@ const RealTimeParkRidePopup = ({ data ,onClick1}) => {
   }
    const handleClick = (e)=>{
       e.preventDefault();
-      onClick1(e.target.name);
+      onClick1(e.target.name, p_name);
    }
 
   return (
@@ -43,7 +44,7 @@ const RealTimeParkRidePopup = ({ data ,onClick1}) => {
            Number of total places : <strong>{grp_exploitation}</strong>
         </p>
       </div>
-      <button className='popup-bookSlot' disabled={count==0 ? true : false} name={_id} onClick={handleClick}>Book Slot</button>
+      <button className='popup-bookSlot' disabled={count==0 ? true : false} name={_id} onClick={handleClick}>MENU</button>
     </div>
   );
 };

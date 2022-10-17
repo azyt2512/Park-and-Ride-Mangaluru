@@ -30,7 +30,7 @@ function Header({ data, onRefresh, onToggleAllParks, isLoading }) {
   return (
     <div className="header-wrapper">
       <header>
-        <h1 className="header-title">P&amp;R Manglore</h1>
+        <h1 className="header-title">P&amp;R Mangaluru</h1>
         <p className="header-version">v1.0.0</p>
       </header>
       {timestamp && (

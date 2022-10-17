@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const TicketSchema = new mongoose.Schema(
     { 
         parkinglot:{
-           type:String,
-           isRequired:true,
+           _id:{type:String, isRequired:true},
+           slot_no:{type:Number, isRequired:true}
         }, 
         user:{
             type:String,
@@ -18,8 +18,16 @@ const TicketSchema = new mongoose.Schema(
             type:String,
             isRequired:true,
         },
+        create_time:{
+            type:Date,
+            isRequired:true,
+        },
+        expire_time:{
+            type:Date,
+            isRequired:true,
+        }
     },
-    { timestamps: true }
+    
 );
 
 module.exports = mongoose.model("ticket", TicketSchema);

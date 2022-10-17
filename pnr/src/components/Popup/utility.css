@@ -1,0 +1,129 @@
+*{
+ margin:0;
+ padding: 0;
+ box-sizing: border-box;   
+}
+
+.container{
+    display: none;
+    position: absolute;
+    backdrop-filter: blur(5px);
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw; 
+    background: rgb(171, 167, 167, 0.5);
+}
+
+.utility{
+    position: relative;
+    top: 15%;
+    left: 15%;
+    height: 75vh;
+    width: 70vw;
+    z-index: 10;
+    overflow: auto;
+    background-color: rgb(237, 233, 225);
+    box-shadow: 1px 1px 14px 5px rgb(88, 206, 249);
+    border: 3px solid white;
+    border-radius: 3px;
+}
+
+#exit{
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    background-color: blue;
+}
+
+.util_nav{
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background-color: rgb(228, 113, 113);
+}
+
+.util_nav .nav_button{
+  padding: 10px 20px;
+  border: none;
+  color: #fff;
+  font-family: inherit;
+  background-color: rgb(228, 113, 113);
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 25px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.util_nav .nav_button:focus{
+  background: rgb(225, 45, 45);
+}
+
+.utilContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.leftFloat{
+    width: 50%;
+    padding: 20px;
+}
+.rightFloat{
+    width: 50%;
+    padding: 15px;
+    margin: 20px;
+    background-color: white;
+}
+
+
+.form,
+.content {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+.form-group label {
+    text-align: left;
+    display: block;
+    font-weight: bold;
+    margin: 0 0 5px 3px;
+  }
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-family: inherit;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background: #000;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    appearance: button;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
