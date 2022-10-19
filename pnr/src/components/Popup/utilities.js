@@ -5,7 +5,7 @@ import Viewticket from "./utilComponent/viewticket"
 import './utility.css';
 import { useState, useEffect } from "react";
 
-const Utility = ({ data, visible, onClick  }) => {
+const Utility = ({ data, visible, onClick, onClick2  }) => {
     
     const [container,setContainer] = useState(undefined);
     const [uoptions,setUoptions] = useState("1");
@@ -33,7 +33,7 @@ const Utility = ({ data, visible, onClick  }) => {
             <button id="exit" onClick={onClick}>X</button>
             </div>
             <>
-            { uoptions=== "1" ? <Bookslot data={data}/>
+            { uoptions=== "1" ? <Bookslot data={data} onClick={onClick2}/>
              : uoptions === "2" ? <Checkout/>
              : <Viewticket/>
             }

@@ -237,6 +237,14 @@ function Map() {
     setShowPopup(true);
   };
   
+  const handleAvail = (_id)=>{
+    for(let i=0; i<data.length; i++){
+       if(data[i]._id === _id){
+         setData([...data, data[i].fields.grp_disponible -= 1]);
+         break;
+       }
+    }
+  }
 
   return (
     <div className="Map">
@@ -257,6 +265,7 @@ function Map() {
         data={utilityData}
         visible={showUtility}
         onClick={() => setShowUtility(false)}
+        onClick2={handleAvail}
       />
     </div>
   );

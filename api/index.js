@@ -8,7 +8,7 @@ const parkRoute = require("./routes/parkinglot");
 const ticketRoute = require("./routes/tickets");
 
 
-let MONGO_URL="mongodb+srv://Jyoti:jyoti123@cluster0.ixkz6hg.mongodb.net/Park-and-Ride-Mangaluru?retryWrites=true&w=majority"
+let MONGO_URL="mongodb://localhost:27017/PNR"
 mongoose
   .connect(MONGO_URL)
   .then(() => console.log("DB Connection Successfull!"))
