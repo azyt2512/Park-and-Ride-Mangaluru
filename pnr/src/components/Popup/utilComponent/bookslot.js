@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
+import Showticket from './showticket'
+import "../utility.css"
 
 export default function Bookslot({data, onClick}) {
     const curr_id = data?._id;
@@ -11,8 +13,10 @@ export default function Bookslot({data, onClick}) {
         v_no:'',
         seckey: '',
       })
-      const [isLoading, setIsLoading] = useState(false);
-      const [resMessage, setResMessage] = useState('View Response Here');  
+      const [isLoading, setIsLoading] = useState(1);
+      const [resMessage, setResMessage] = useState('View Response Here');
+      const [ticketData, setTicketData] = useState(undefined);
+
     const onChange = (e) => {
         setFormData({
           ...formData,
@@ -21,16 +25,16 @@ export default function Bookslot({data, onClick}) {
       }
     const onSubmit = async (e) =>{
        e.preventDefault();
-       setIsLoading(true);
+       setIsLoading(2);
        try {
           const res = await axios.post("http://localhost:5000/api/ticket/add",formData)
-          console.log(res.data);
+          setTicketData(res.data);
           onClick(curr_id);
           setResMessage("Ticket Created Successfully");
-          setIsLoading(false);
+          setIsLoading(3);
        } catch (error) {
-        setResMessage("Something went wrong :(");
-          setIsLoading(false);
+        setResMessage("Internal server error Something went wrong :(");
+          setIsLoading(4);
         console.log(error);
        }
     }
@@ -93,13 +97,15 @@ export default function Bookslot({data, onClick}) {
         </div>
         <div className='rightFloat'>
           <div className='rightUp'>
-          {isLoading ? <div className='spinner'></div>
-           : ''
+          {isLoading === 2? <div className='spinner'></div>
+            : isLoading === 3 ? <Showticket data={ticketData}/>
+            : isLoading === 4 ? <div className='ticket-table'><img src='./error.jpg'></img></div>
+            : <div className='ticket-table'><img src='./default-img.png'></img></div>
           }
           </div>
           <div className='rightDown'>
-          {isLoading ? ''
-           : <div id = 'util_msg'>{resMessage}</div>
+          {isLoading === 2 ? ''
+            : <div id='util_msg'>{resMessage}</div>
           }
           </div>
         </div>

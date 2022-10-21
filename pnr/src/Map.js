@@ -107,6 +107,8 @@ function Map() {
         if (point.fields?.location) {
           const places = point.fields.grp_disponible;
 
+          localStorage.setItem(point._id, point.fields.grp_nom);
+
           const el = document.createElement("div");
           el.className = `marker ${
             places === 0 ? "danger" : places < 10 ? "warning" : ""

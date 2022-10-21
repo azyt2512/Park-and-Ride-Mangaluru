@@ -34,11 +34,11 @@ router.post("/add", async (req, res) => {
 
 //CHECKOUT
 
-router.delete("/checkout", async (req, res) => {
+router.post("/checkout", async (req, res) => {
   // console.log(req.body);
   try {
     const ticket = await Tickets.findOne({ vehicle: req.body.v_no });
-    if(!ticket)  res.status(401).json("Wrong credentials!");
+    if(!ticket)  res.status(401).json("Wrong credential!");
     else{
 
       // console.log(ticket);
@@ -67,18 +67,22 @@ router.post("/view", async (req, res) => {
   // console.log(req.body);
   try {
     const ticket = await Tickets.findOne({ vehicle: req.body.v_no });
-    !ticket && res.status(401).json("Wrong credentials!");
+    if(!ticket)  res.status(401).json("Wrong credentials!");
+    else{
 
-    // console.log(ticket);
-    const hashedPassword = CryptoJS.AES.decrypt(
-      ticket.reff_no,
-      process.env.PASS_SEC
-    );
-    const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
-    OriginalPassword !== req.body.seckey && res.status(401).json("Wrong credentials!");
-    // console.log(OriginalPassword);  
-    res.status(200).json(ticket);  
-    
+      // console.log(ticket);
+      const hashedPassword = CryptoJS.AES.decrypt(
+        ticket.reff_no,
+        process.env.PASS_SEC
+      );
+      const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+      if(OriginalPassword !== req.body.seckey)  res.status(401).json("Wrong credentials!");
+      // console.log(OriginalPassword);  
+      else{
+        res.status(200).json(ticket);  
+      }
+      
+    }
   } catch (err) {
     res.status(500).json(err);
   }

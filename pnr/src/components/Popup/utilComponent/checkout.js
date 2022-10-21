@@ -1,14 +1,17 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
+import Showticket from './showticket'
 
 export default function Checkout() {
     const [formData, setFormData] = useState({
         v_no:'',
         seckey: '',
       })
-      const [isLoading, setIsLoading] = useState(false);
-      const [resMessage, setResMessage] = useState('View Response Here');  
+      const [isLoading, setIsLoading] = useState(1);
+      const [resMessage, setResMessage] = useState('View Response Here');
+      const [ticketData, setTicketData] = useState(undefined);
+
       const onChange = (e) => {
         setFormData({
           ...formData,
@@ -17,15 +20,19 @@ export default function Checkout() {
       }
       const onSubmit = async (e) =>{
         e.preventDefault();
-        setIsLoading(true);
+        setIsLoading(2);
         try {
-           const res = await axios.delete("http://localhost:5000/api/ticket/checkout",formData)
-           console.log(res.data);
+           console.log(formData);
+           const res = await axios.post("http://localhost:5000/api/ticket/checkout",formData)
+           setTicketData(res.data);
            setResMessage("Ticket has been Flushed Successfully");
-          setIsLoading(false);
+          setIsLoading(3);
         } catch (error) {
-          setResMessage("Something went wrong :(");
-          setIsLoading(false);
+          if(error.response.status === 401)
+          setResMessage("Wrong Credentials :(");
+          else
+          setResMessage("Internal server error Something went wrong :(");
+          setIsLoading(4);
          console.log(error);
         }
      }
@@ -65,13 +72,15 @@ export default function Checkout() {
         </div>
         <div className='rightFloat'>
           <div className='rightUp'>
-          {isLoading ? <div className='spinner'></div>
-           : ''
+          {isLoading === 2? <div className='spinner'></div>
+            : isLoading === 3 ? <Showticket data={ticketData}/>
+            : isLoading === 4 ? <div className='ticket-table'><img src='./error.jpg'></img></div>
+            : <div className='ticket-table'><img src='./default-img.png'></img></div>
           }
           </div>
           <div className='rightDown'>
-          {isLoading ? ''
-           : <div id = 'util_msg'>{resMessage}</div>
+          {isLoading === 2 ? ''
+            : <div id='util_msg'>{resMessage}</div>
           }
           </div>
         </div>
