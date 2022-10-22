@@ -29,15 +29,15 @@ router.get("/getone/:id", async (req, res) => {
 
 //UPDATE
 
-router.patch("/uavail",  async (req, res) => {
+router.post("/uavail",  async (req, res) => {
      const avl = req.body.val - 1;
      const id = req.body.id;
     try {
       const updatedPark = await Parkinglot.findOneAndUpdate(
         {_id:id},
-        {
+        {$set:{
           "fields.grp_disponible":avl
-        }
+        }}
       );
       // console.log(updatedPark);
       res.status(200).json(updatedPark);

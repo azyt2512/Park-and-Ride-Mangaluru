@@ -1,4 +1,5 @@
 1. Add expire and create time in table and show a message in view ticket accordingly.
 2. create empty_slot func for alloting empty_slot
 3. avoid vehicle collision in database
-4. notification (optional for now)
+4. updating places available in database
+5. notification (optional for now)

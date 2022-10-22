@@ -33,7 +33,10 @@ export default function Bookslot({data, onClick}) {
           setResMessage("Ticket Created Successfully");
           setIsLoading(3);
        } catch (error) {
-        setResMessage("Internal server error Something went wrong :(");
+          if(error.response.status === 401)
+          setResMessage("You can't make another ticket within 15 min of registration:(");
+          else
+          setResMessage("Internal server error Something went wrong :(");
           setIsLoading(4);
         console.log(error);
        }
