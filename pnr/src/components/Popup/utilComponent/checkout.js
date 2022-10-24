@@ -3,7 +3,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import Showticket from './showticket'
 
-export default function Checkout() {
+export default function Checkout({onClick}) {
     const [formData, setFormData] = useState({
         v_no:'',
         seckey: '',
@@ -25,6 +25,7 @@ export default function Checkout() {
            console.log(formData);
            const res = await axios.post("http://localhost:5000/api/ticket/checkout",formData)
            setTicketData(res.data);
+           onClick(res.data.parkinglot._id,'C');
            setResMessage("Ticket has been Flushed Successfully");
           setIsLoading(3);
         } catch (error) {

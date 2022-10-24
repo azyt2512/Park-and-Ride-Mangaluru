@@ -239,13 +239,25 @@ function Map() {
     setShowPopup(true);
   };
   
-  const handleAvail = (_id)=>{
-    for(let i=0; i<data.length; i++){
-       if(data[i]._id === _id){
-         setData([...data, data[i].fields.grp_disponible -= 1]);
-         break;
-       }
+  const handleAvail = async (_id, char)=>{
+    let adder = 1;
+    if(char === 'B') adder = -1;
+    try {
+      let target = 0;
+      
+      for(let i=0; i<data.length; i++){
+        if(data[i]._id === _id){
+          target = i;
+          break;
+        }
+      }
+      await axios.post("http://localhost:5000/api/parkinglot/uavail",{"id":_id,"val":data[target].fields.grp_disponible + adder});
+      setData([...data, data[target].fields.grp_disponible += adder]);
+      
+    } catch (error) {
+      
     }
+    
   }
 
   return (

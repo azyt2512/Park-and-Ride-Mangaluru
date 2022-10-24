@@ -5,6 +5,7 @@ import './marker.css';
 function Marker({ data, onClick }) {
   let count = data.fields.grp_disponible;
   const status = data.fields.grp_statut;
+  const name = data.fields.grp_nom;
   let className = `marker ${
     count === 0 ? 'danger' : count < 10 ? 'warning' : ''
   }`;
@@ -17,7 +18,14 @@ function Marker({ data, onClick }) {
     count = 'X';
   }
 
-  return <div onClick={() => onClick(data)} className={className}>{count}</div>;
+  return (<>
+          <div className='marker-container'>
+
+          <div onClick={() => onClick(data)} className={className}><div >{count}</div></div>
+          <div className='small'>{name}</div>
+          </div>
+          </>
+  );
 }
 
 Marker.propTypes = {

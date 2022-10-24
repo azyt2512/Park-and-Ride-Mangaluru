@@ -8,7 +8,7 @@ const ParkingSchema = new mongoose.Schema(
         recordid: {
             type: String
         },
-        Fields: {
+        fields: {
         
                 grp_complet: {
                     type: Number
@@ -42,7 +42,7 @@ const ParkingSchema = new mongoose.Schema(
                     type: Number
                 }   
         },
-        Geometry: {
+        geometry: {
                 type: {
                     type: String
                 },

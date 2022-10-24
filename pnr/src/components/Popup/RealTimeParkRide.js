@@ -44,7 +44,7 @@ const RealTimeParkRidePopup = ({ data ,onClick1}) => {
            Number of total places : <strong>{grp_exploitation}</strong>
         </p>
       </div>
-      <button className='popup-bookSlot' disabled={count==0 ? true : false} name={_id} onClick={handleClick}>MENU</button>
+      <button className=' btn btn-block' disabled={count==0 ? true : false} name={_id} onClick={handleClick}>MENU</button>
     </div>
   );
 };

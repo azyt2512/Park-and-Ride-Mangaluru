@@ -29,7 +29,7 @@ export default function Bookslot({data, onClick}) {
        try {
           const res = await axios.post("http://localhost:5000/api/ticket/add",formData)
           setTicketData(res.data);
-          onClick(curr_id);
+          onClick(curr_id,'B');
           setResMessage("Ticket Created Successfully");
           setIsLoading(3);
        } catch (error) {

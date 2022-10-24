@@ -30,17 +30,19 @@ router.get("/getone/:id", async (req, res) => {
 //UPDATE
 
 router.post("/uavail",  async (req, res) => {
-     const avl = req.body.val - 1;
+     const avl = req.body.val;
      const id = req.body.id;
     try {
-      const updatedPark = await Parkinglot.findOneAndUpdate(
-        {_id:id},
-        {$set:{
-          "fields.grp_disponible":avl
-        }}
-      );
+      const updatedPark = await Parkinglot.findOne({ _id: req.body.id });
+      if(updatedPark){
+        updatedPark.fields.grp_disponible = avl;
+        updatedPark.save();
+        res.status(200).json(updatedPark);
+      }
+      else{
+        res.status(404).json("Awwwww!!!!!");
+      }
       // console.log(updatedPark);
-      res.status(200).json(updatedPark);
     } catch (err) {
       res.status(500).json(err);
     }

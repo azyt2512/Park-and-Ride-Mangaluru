@@ -39,7 +39,7 @@ const Utility = ({ data, visible, onClick, onClick2  }) => {
             </div>
             <>
             { uoptions=== "1" ? <Bookslot data={data} onClick={onClick2}/>
-             : uoptions === "2" ? <Checkout/>
+             : uoptions === "2" ? <Checkout onClick={onClick2}/>
              : uoptions === "3" ? <Viewticket/>
              :<div>
                 <div className="logo-img">

@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: auto;
   height: 38px;
   width: 38px;
   box-sizing: border-box;
@@ -30,4 +31,22 @@
   color: rgb(122, 122, 122);
   border: 3px solid rgb(122, 122, 122);
   background-color: rgb(247, 247, 247);
+}
+
+.small{
+  visibility: hidden;
+  position: absolute;
+  width: max-content;
+  background-color: rgba(17, 89, 152, 0.3);
+  border: 0.3px solid white;
+  border-radius: 7px;
+  bottom: 90%;
+  padding: 4px;
+  font-family: inherit;
+  font-size: 10px;
+  text-align: center;
+}
+
+.marker:hover + .small{
+  visibility: visible;
 }
