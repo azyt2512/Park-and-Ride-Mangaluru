@@ -17,21 +17,42 @@
 
 .utility{
     position: relative;
-    top: 15%;
-    left: 15%;
-    height: 75vh;
-    width: 70vw;
+    top: 10%;
+    left: 10%;
+    height: 85vh;
+    width: 80vw;
     z-index: 10;
     overflow: auto;
     background-color: rgb(237, 233, 225);
-    box-shadow: 1px 1px 14px 5px rgb(88, 206, 249);
-    border: 3px solid white;
+    box-shadow: 1px 1px 14px 5px rgb(158 219 246 / 1);
+    border: 2px solid white;
     border-radius: 3px;
 }
 
  .mendate{
   color: red;
 }
+
+.form-group .fradio{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}
+.form-group .fradio .radiobutts label{
+  font-size: smaller;
+  font-weight: 100;
+}
+.form-group .fradio .radiobutts input{
+  width: auto;
+  margin-top: 5px;
+}
+.form-group .fradio .radiobutts{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 
 #exit{
     position: absolute;

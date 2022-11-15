@@ -5,7 +5,7 @@ const router = require("express").Router();
 
 const verifyVehicle = async (req, res, next) => {
   try {
-      console.log(req.body);
+      // console.log(req.body);
       let vehicle = await Tickets.findOne({ vehicle: req.body.v_no })
       if(vehicle){
           let curr_time = new Date();
@@ -54,6 +54,7 @@ router.post("/add", verifyVehicle, async (req, res) => {
           parkinglot:{ _id:req.body.plot._id,
                        slot_no:slot_alloting},
           user: req.body.user,
+          vehicle_type: req.body.v_type,
           vehicle: req.body.v_no,
           reff_no: CryptoJS.AES.encrypt(
             req.body.seckey,
@@ -79,21 +80,28 @@ router.post("/checkout", async (req, res) => {
     const ticket = await Tickets.findOne({ vehicle: req.body.v_no });
     if(!ticket)  res.status(401).json("Wrong credential!");
     else{
-
-      // console.log(ticket);
-      const hashedPassword = CryptoJS.AES.decrypt(
-        ticket.reff_no,
-        process.env.PASS_SEC
-      );
-      const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
-      if(OriginalPassword !== req.body.seckey)  res.status(401).json("Wrong credentials!");
-      // console.log(OriginalPassword);  
+      let curr_time = new Date();
+      if(curr_time > ticket.expire_time)
+      { await Tickets.findOneAndDelete({ vehicle: req.body.v_no })
+        res.status(401).json('Wrong credentials!');
+      }
       else{
 
-        const delticket = await Tickets.findOneAndDelete({vehicle:req.body.v_no, reff_no:ticket.reff_no});
-        res.status(200).json(delticket);  
+        // console.log(ticket);
+        const hashedPassword = CryptoJS.AES.decrypt(
+          ticket.reff_no,
+          process.env.PASS_SEC
+        );
+        const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+        if(OriginalPassword !== req.body.seckey)  res.status(401).json("Wrong credentials!");
+        // console.log(OriginalPassword);  
+        else{
+  
+          const delticket = await Tickets.findOneAndDelete({vehicle:req.body.v_no, reff_no:ticket.reff_no});
+          res.status(200).json(delticket);  
+        }
+        
       }
-      
     }
   } catch (err) {
     res.status(500).json(err);
@@ -108,19 +116,26 @@ router.post("/view", async (req, res) => {
     const ticket = await Tickets.findOne({ vehicle: req.body.v_no });
     if(!ticket)  res.status(401).json("Wrong credentials!");
     else{
-
-      // console.log(ticket);
-      const hashedPassword = CryptoJS.AES.decrypt(
-        ticket.reff_no,
-        process.env.PASS_SEC
-      );
-      const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
-      if(OriginalPassword !== req.body.seckey)  res.status(401).json("Wrong credentials!");
-      // console.log(OriginalPassword);  
-      else{
-        res.status(200).json(ticket);  
+      let curr_time = new Date();
+      if(curr_time > ticket.expire_time)
+      { await Tickets.findOneAndDelete({ vehicle: req.body.v_no })
+        res.status(401).json('Wrong credentials!');
       }
-      
+      else{
+
+        // console.log(ticket);
+        const hashedPassword = CryptoJS.AES.decrypt(
+          ticket.reff_no,
+          process.env.PASS_SEC
+        );
+        const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+        if(OriginalPassword !== req.body.seckey)  res.status(401).json("Wrong credentials!");
+        // console.log(OriginalPassword);  
+        else{
+          res.status(200).json(ticket);  
+        }
+        
+      }
     }
   } catch (err) {
     res.status(500).json(err);

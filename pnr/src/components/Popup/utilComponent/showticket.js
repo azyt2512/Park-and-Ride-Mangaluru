@@ -31,7 +31,7 @@ export default function Showticket({data}) {
             </tr>
             <tr>
                 <th>Slot No.</th>
-                <td>{data?.parkinglot.slot_no}</td>
+                <td>{data?.vehicle_type}{data?.parkinglot.slot_no}</td>
             </tr>
             <tr>
                 <th>Owner</th>

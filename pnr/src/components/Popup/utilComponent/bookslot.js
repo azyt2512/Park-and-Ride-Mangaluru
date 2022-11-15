@@ -10,6 +10,7 @@ export default function Bookslot({data, onClick}) {
     const [formData, setFormData] = useState({
         plot:{_id:curr_id,slot:7},
         user: '',
+        v_type:'',
         v_no:'',
         seckey: '',
       })
@@ -67,6 +68,44 @@ export default function Bookslot({data, onClick}) {
               placeholder='Enter your name'
               onChange={onChange}
             />
+          </div>
+          <div className='form-group'>
+          <label>Vehicle Type<span className='mendate'>*</span> </label>
+          <div className='fradio'>
+            <div className='radiobutts'>
+            <input
+              type='radio'
+              className='form-control'
+              id='car'
+              name='v_type'
+              value='C'
+              onClick={onChange}
+            />
+            <label htmlFor="car">Car(4 wheelers)</label>
+            </div>
+            <div className='radiobutts'>
+            <input
+              type='radio'
+              className='form-control'
+              id='bike'
+              name='v_type'
+              value='B'
+              onClick={onChange}
+            />
+            <label htmlFor="bike">Bike(2 wheelers)</label>
+            </div>
+            <div className='radiobutts'>
+            <input
+              type='radio'
+              className='form-control'
+              id='lvehicle'
+              name='v_type'
+              value='L'
+              onClick={onChange}
+            />
+            <label htmlFor="lvehicle">Large vehicle</label>
+            </div>
+          </div>
           </div>
           <div className='form-group'>
             <label>Vehicle No.<span className='mendate'>*</span></label>
